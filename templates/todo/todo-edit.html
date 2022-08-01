@@ -11,11 +11,11 @@
         
         <h3>Edit todos</h3>
 
-        <form class="ui form" method="POST" action={% url 'edit-todo' %}>
+        <form class="ui form" method="POST" action={% url 'edit-todo' todo.id%}>
                 {% csrf_token %}
                 {{form.as_p}}
 
-                <input type="submit" class="ui button primary" value="Submit">
+                <input type="submit" class="ui button primary" value="Save">
         </form>
 
         
