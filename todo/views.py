@@ -61,3 +61,7 @@ def todo_delete(request, id):
         todo.delete()
         return HttpResponseRedirect(reverse('home'))
     return render(request, 'todo/todo-delete.html', context)
+
+
+def todo_edit(request, id):
+    return render(request, 'todo/todo-edit.html')
