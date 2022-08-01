@@ -1,8 +1,3 @@
-{% extends '_partials/base.html' %}
-{% load static %} 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,15 +8,11 @@
     </head>
     <body>
 
-        <img src={% static 'img/astronaut.png' %}>
+        <div> 
+            <h4>Hello</h4>
+            {% block content %}
 
-        <h3>List of todos</h3>
-
-
-        <ul>
-            <li>Go Home</li>
-            <li>Go Home</li>
-            <li>Go Home</li>
-        </ul>
+            {% endblock content %}
+        </div>
     </body>
 </html>
