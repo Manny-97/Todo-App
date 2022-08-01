@@ -28,3 +28,5 @@ def create_todo(request):
     return render(request, 'todo/create-todo.html', context)
 
 
+def todo_detail(request):
+    return render(request, 'todo-detail.html')
