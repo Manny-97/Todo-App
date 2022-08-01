@@ -7,7 +7,13 @@ from django.urls import reverse
 # Create your views here.
 def index(request):
     todos = Todo.objects.all()
-    context = {'todos': todos}
+    completed_count = todos.filter(is_completed=True).count()
+    incomplete_count = todos.filter(is_completed=False).count()
+    all_count = todos.count()
+
+    
+    context = {'todos': todos, 'all_count': all_count,
+                'completed_count': completed_count, 'incomplete_count': incomplete_count}
     return render(request, 'todo/index.html', context)
 
 def create_todo(request):
