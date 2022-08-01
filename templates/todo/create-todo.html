@@ -11,7 +11,7 @@
         
         <h3>Create todos</h3>
 
-        <form class="ui form" method="POST" action={% url 'creat-todo' %}>
+        <form class="ui form" method="POST" action={% url 'create-todo' %}>
                 {% csrf_token %}
                 {{form.as_p}}
 
