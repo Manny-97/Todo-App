@@ -7,15 +7,46 @@
 
 
 
-        <img src={% static 'img/astronaut.png' %}>
 
-        <h3>List of todos</h3>
+        <h1 class="ui header">My List of Todos</h1>
 
 
-        <ul>
-            <li>Go Home</li>
-            <li>Go Home</li>
-            <li>Go Home</li>
-        </ul>
+    {% if todos %}
+    
+    <table class="ui table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
+        <tbody>
+
+            {% for todo in todos %} 
+
+            <tr>
+                <td>{{todo.title}}</td>
+                <td>{{todo.description}}</td>
+                <td>{{todo.is_completed}}</td>
+
+                <td>
+                    <a href="" class="ui button">
+                        <i class="eye icon"></i>
+                    </a>
+
+                    <a href="" class="ui button">
+                        <i class="pencil icon"></i>
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %} 
+
+    {% endif %}
         {% endblock content %}
