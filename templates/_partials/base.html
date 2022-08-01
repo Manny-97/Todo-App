@@ -12,9 +12,12 @@
         <div> 
             {% include '_partials/header.html' %}
 
-            {% block content %}
+            <div class="ui container">
+                {% block content %}
 
-            {% endblock content %}
+                {% endblock content %}
+            </div>
+
         </div>
     </body>
 </html>
