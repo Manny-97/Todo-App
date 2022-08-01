@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Todo
 from .forms import TodoForm
 from django.urls import reverse
@@ -49,4 +49,6 @@ def create_todo(request):
 
 
 def todo_detail(request, id):
-    return render(request, 'todo/todo-detail.html', {})
+    todo = get_object_or_404(Todo, pk=id)
+    context = {'todo': todo}
+    return render(request, 'todo/todo-detail.html', context)
