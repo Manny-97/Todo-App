@@ -65,6 +65,11 @@ def todo_delete(request, id):
 
     if request.method == 'POST':
         todo.delete()
+        messages.add_message(
+            request,
+            messages.SUCCESS, 
+            "Todo deleted successfully"
+        )
         return HttpResponseRedirect(reverse('home'))
     return render(request, 'todo/todo-delete.html', context)
 
@@ -88,7 +93,7 @@ def todo_edit(request, id):
         messages.add_message(
             request,
             messages.SUCCESS, 
-            "Todo updated successful"
+            "Todo updated successfully"
         )
 
         return HttpResponseRedirect(reverse("todo", kwargs={"id": todo.pk}))
