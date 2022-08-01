@@ -2,6 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Todo
 from .forms import TodoForm
+from django.urls import reverse
+
 # Create your views here.
 def index(request):
     return render(request, 'todo/index.html')
@@ -11,7 +13,7 @@ def create_todo(request):
     context = {'form': form}
 
     if request.method == "POST":
-        titles = request.POST.get('title')
+        title = request.POST.get('title')
         description = request.POST.get('description')
         is_completed = request.POST.get('is_completed', False)
 
@@ -23,10 +25,10 @@ def create_todo(request):
 
         todo.save()
 
-        return HttpResponseRedirect('')
+        return HttpResponseRedirect(reverse("todo", kwargs={"id": todo.pk}))
 
     return render(request, 'todo/create-todo.html', context)
 
 
-def todo_detail(request):
-    return render(request, 'todo-detail.html')
+def todo_detail(request, id):
+    return render(request, 'todo/todo-detail.html', {})

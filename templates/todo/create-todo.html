@@ -12,7 +12,7 @@
         <h3>Create todos</h3>
 
         <form class="ui form" method="POST" action={% url 'creat-todo' %}>
-                {{csrf_token}}
+                {% csrf_token %}
                 {{form.as_p}}
 
                 <input type="submit" class="ui button primary" value="Submit">
