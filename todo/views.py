@@ -7,7 +7,7 @@ from django.urls import reverse
 # Create your views here.
 def index(request):
     todos = Todo.objects.all()
-    context = {'todos': todos}
+    context = {'todos': []}
     return render(request, 'todo/index.html', context)
 
 def create_todo(request):

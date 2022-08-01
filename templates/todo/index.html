@@ -48,5 +48,13 @@
     </table>
     {% else %} 
 
+    <div class="ui message">
+        <div class="header">
+            No items
+        </div>
+        <p>You can create your first todo now <a href={% url 'create-todo' %}>Add new</a>
+        </p>
+    </div>
+
     {% endif %}
         {% endblock content %}
