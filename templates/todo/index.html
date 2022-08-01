@@ -30,7 +30,19 @@
             <tr>
                 <td>{{todo.title}}</td>
                 <td>{{todo.description}}</td>
-                <td>{{todo.is_completed}}</td>
+
+
+
+                <td>
+                    {% id todo.is_completed %} 
+
+                    YES <i class="check icon green"></i>
+
+                    {% else %} 
+
+                    NO
+                    
+                    {{todo.is_completed}}</td>
 
                 <td>
                     <a href="" class="ui button">
