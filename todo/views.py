@@ -64,4 +64,8 @@ def todo_delete(request, id):
 
 
 def todo_edit(request, id):
-    return render(request, 'todo/todo-edit.html')
+    todo = get_object_or_404(Todo, pk=id)
+    form = TodoForm(instance=todo)
+
+    context = {'todo': todo, 'form': form}
+    return render(request, 'todo/todo-edit.html', context)
