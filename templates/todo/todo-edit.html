@@ -11,7 +11,7 @@
         
         <h3>Edit todos</h3>
 
-        <form class="ui form" method="POST" action={% url 'edit-todo' todo.id%}>
+        <form class="ui form" method="POST" action={% url 'todo-edit' todo.id%}>
                 {% csrf_token %}
                 {{form.as_p}}
 
