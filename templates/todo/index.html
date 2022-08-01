@@ -34,7 +34,7 @@
 
 
                 <td>
-                    {% id todo.is_completed %} 
+                    {% if todo.is_completed %} 
 
                     YES <i class="check icon green"></i>
 
@@ -42,8 +42,14 @@
 
                     NO
                     
-                    {{todo.is_completed}}</td>
+                    {{todo.is_completed}}
+                
 
+                    {% endif %}
+                
+                </td>
+
+                    
                 <td>
                     <a href="" class="ui button">
                         <i class="eye icon"></i>
