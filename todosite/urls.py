@@ -24,3 +24,4 @@ urlpatterns = [
 
 
 handler404 = "helpers.views.handle_not_found"
+handleer500 = "helpers.views.handle_server_error"
