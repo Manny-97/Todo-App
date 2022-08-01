@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import Todo
 from .forms import TodoForm
 from django.urls import reverse
-
+from django.contrib import messages
 # Create your views here.
 
 def get_showing_todos(request, todos):
@@ -43,6 +43,12 @@ def create_todo(request):
 
         todo.save()
 
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            "Todo created successfully"
+        )
+
         return HttpResponseRedirect(reverse("todo", kwargs={"id": todo.pk}))
 
     return render(request, 'todo/create-todo.html', context)
@@ -78,6 +84,12 @@ def todo_edit(request, id):
         todo.is_completed = True if is_completed == "on" else False
 
         todo.save()
+
+        messages.add_message(
+            request,
+            messages.SUCCESS, 
+            "Todo updated successful"
+        )
 
         return HttpResponseRedirect(reverse("todo", kwargs={"id": todo.pk}))
     
