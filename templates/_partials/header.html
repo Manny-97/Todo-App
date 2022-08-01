@@ -1,1 +1,35 @@
-<h1>Header</h1>
+{%load static %}
+
+<di class="ui menu">
+    <div class="ui container">
+        <a href="" class="header item">
+            <img class="logo" class="logo" src={% static 'img/astronaut.png' %} />
+        </a>
+        <div class="right item">
+            <a href="" class="ui primary button">Create Todo</a>
+            <div class="ui simple dropdown item">
+                User X <I class="dropdown icon"></I>
+                <div class="menu">
+                    <form class="ui large form" method="post" action="">
+                        <input class="ui button"
+                            type="submit"
+                            value="Sign out"
+                            />
+                    </form>
+
+                </div>
+            </div>
+            <div class="ui item">
+                <a href="" class="ui primary button">Login</a>
+            </div>
+            <div class="ui item">
+                <a href="" class="ui primary button">Logout</a>
+            </div>
+            <div class="ui item">
+                <a href="" class="ui primary button">Register</a>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
