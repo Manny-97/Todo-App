@@ -66,6 +66,19 @@ def todo_delete(request, id):
 def todo_edit(request, id):
     todo = get_object_or_404(Todo, pk=id)
     form = TodoForm(instance=todo)
-
     context = {'todo': todo, 'form': form}
+    if request.method == "POST":
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        is_completed = request.POST.get('is_completed', False)
+
+
+        todo.title = title
+        todo.description = description
+        todo.is_completed = True if is_completed == "on" else False
+
+        todo.save()
+
+        return HttpResponseRedirect(reverse("todo", kwargs={"id": todo.pk}))
+    
     return render(request, 'todo/todo-edit.html', context)
