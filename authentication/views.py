@@ -1,5 +1,5 @@
 from tkinter.font import families
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
 from validate_email import validate_email
@@ -41,6 +41,7 @@ def register(request):
         user.save()
 
         messages.add_message(request, messages.SUCCESS, 'Account created, you can now login')
+        return redirect(request, 'login')
     return render(request, 'authentication/register.html')
 
 def login(request):
