@@ -12,7 +12,7 @@
             <div class="ui simple dropdown item">
                 {{request.user.username}} <I class="dropdown icon"></I>
                 <div class="menu">
-                    <form class="ui large form" method="post" action="">
+                    <form class="ui large form" method="post" action={% url 'logout_user' %}>
                         <input class="ui button"
                             type="submit"
                             value="Sign out"
