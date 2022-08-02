@@ -14,7 +14,16 @@ from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeErr
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+import threading
 
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send()
 # from validate_email import validate_email
 # Create your views here.
 
@@ -31,7 +40,8 @@ def send_action_email(user, request):
 
     email = EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_FROM_USER, to=[user.email])
 
-    email.send()
+    # email.send()
+    EmailThread(email).start()
 
 @auth_user_should_not_access
 def register(request):
