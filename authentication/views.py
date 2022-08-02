@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
 from validate_email import validate_email
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # from validate_email import validate_email
 # Create your views here.
@@ -66,3 +66,10 @@ def login_user(request):
         messages.add_message(request, messages.SUCCESS, f"Welcome {user.username}")
         return redirect(reverse('home'))
     return render(request, 'authentication/login.html')
+
+
+def logout_user(request):
+    logout(request)
+    messages.add_message(request, messages.SUCCESS, f"Successfully logogged out")
+
+    return redirect(reverse('login'))
