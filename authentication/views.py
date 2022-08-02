@@ -1,8 +1,11 @@
+from audioop import reverse
 from tkinter.font import families
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
 from validate_email import validate_email
+from django.contrib.auth import authenticate, login
+
 # from validate_email import validate_email
 # Create your views here.
 def register(request):
@@ -44,5 +47,22 @@ def register(request):
         return redirect(request, 'login')
     return render(request, 'authentication/register.html')
 
-def login(request):
+def login_user(request):
+
+    if request.method == 'POST':
+        context = {'data': request.POST}
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if not user:
+
+            messages.add_message(request, messages.ERROR, 'invalid credentials')
+            return render(request, 'authentication/login.html', context)
+
+        login(request, user)
+
+        messages.add_message(request, messages.SUCCESS, f"Welcome {user.username}")
+        return redirect(reverse('home'))
     return render(request, 'authentication/login.html')
