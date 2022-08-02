@@ -1,4 +1,4 @@
-from audioop import reverse
+from django.urls import reverse
 from tkinter.font import families
 from django.shortcuts import render, redirect
 from django.contrib import messages
