@@ -7,10 +7,25 @@ from helpers.decorators import auth_user_should_not_access
 from .models import User
 from validate_email import validate_email
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
+from .utils import generate_token
 
 # from validate_email import validate_email
 # Create your views here.
 
+
+def send_action_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate your account'
+    email_body = render_to_string('authentication/activate.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user)
+    })
 @auth_user_should_not_access
 def register(request):
     if request.method == 'POST':
@@ -47,6 +62,8 @@ def register(request):
         user.set_password(password)
         user.save()
 
+        send_action_email(user, request)
+
         messages.add_message(request, messages.SUCCESS, 'Account created, you can now login')
         return redirect(request, 'login')
     return render(request, 'authentication/register.html')
@@ -60,6 +77,10 @@ def login_user(request):
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
+
+        if not user.is_email_verified:
+            messages.add_message(request, messages.ERROR, 'Email is not verified, please check your email inbox')
+            return render(request, 'authentication/login.html', context)
 
         if not user:
 
