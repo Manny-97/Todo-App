@@ -12,6 +12,8 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
 from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 # from validate_email import validate_email
 # Create your views here.
@@ -26,6 +28,12 @@ def send_action_email(user, request):
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': generate_token.make_token(user)
     })
+
+    email = EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_FORM_USER,
+                to=[user.email])
+
+    email.send()
+
 @auth_user_should_not_access
 def register(request):
     if request.method == 'POST':
