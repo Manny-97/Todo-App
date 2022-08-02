@@ -99,3 +99,22 @@ def logout_user(request):
     messages.add_message(request, messages.SUCCESS, f"Successfully logogged out")
 
     return redirect(reverse('login'))
+
+
+def activate_user(request, uidb64, token):
+
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except Exception as e:
+        user = None
+
+    if user and generate_token.check_token(user, token):
+        user.is_email_verified = True
+        user.save()
+        
+
+        messages.add_message(request, messages.SUCCESS, 'Email verified, you can now login')
+
+        return redirect(reverse('home'))
+    return render(request, 'authentication/activate-failed.html', {'user': user})
