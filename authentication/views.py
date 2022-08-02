@@ -2,12 +2,16 @@ from django.urls import reverse
 from tkinter.font import families
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from helpers.decorators import auth_user_should_not_access
 from .models import User
 from validate_email import validate_email
 from django.contrib.auth import authenticate, login, logout
 
 # from validate_email import validate_email
 # Create your views here.
+
+@auth_user_should_not_access
 def register(request):
     if request.method == 'POST':
         context = {'has_error': False, 'data': request.POST}
@@ -47,6 +51,7 @@ def register(request):
         return redirect(request, 'login')
     return render(request, 'authentication/register.html')
 
+@auth_user_should_not_access
 def login_user(request):
 
     if request.method == 'POST':
