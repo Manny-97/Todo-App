@@ -68,6 +68,9 @@ def register(request):
         if User.objects.filter(username=username).exists():
             messages.add_message(request, messages.ERROR, 'Username is taken, choose another one')
             context['has_error'] = True
+
+            return render(request, 'authentication/register.html', context, status=409)
+
         if User.objects.filter(email=email).exists():
             messages.add_message(request, messages.ERROR, 'Email is taken, choose another one')
             context['has_error'] = True 
