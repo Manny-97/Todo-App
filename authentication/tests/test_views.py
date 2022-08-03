@@ -37,3 +37,24 @@ class TestViews(TestCase):
         response = self.client.post(reverse('register'), self.user)
 
         self.assertEquals(response.status_code, 409)
+
+    def test_should_not_signup_user_with_taken_email(self):
+
+        self.user = {
+            'username': 'username1',
+            'email': 'email@hmail2.com',
+            'password': 'password',
+            'password2': 'password'
+        }
+
+        self.test_user2 = {
+            'username': 'username11',
+            'email': 'email@hmail2.com',
+            'password': 'password',
+            'password2' : 'password'
+        }
+
+        self.client.post(reverse('register'), self.user)
+        response = self.client.post(reverse('register'), self.test_user2)
+
+        self.assertEquals(response.status_code, 409)
