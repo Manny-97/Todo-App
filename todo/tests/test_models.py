@@ -1,12 +1,12 @@
-from django.test import TestCase
-from matplotlib.pyplot import title
+from utils.setup_test import TestSetup
 from authentication.models import User
-from django.test import TestCase
 from todo.models import Todo
-class TestModel(TestCase):
+
+
+class TestModel(TestSetup):
 
     def test_should_create_todo(self):
-       
+        user = self.create_test_user()
 
         todo = Todo(owner=user, title='Buy milk', description='get it done')
 

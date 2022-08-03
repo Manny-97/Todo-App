@@ -1,12 +1,13 @@
-from django.test import TestCase
+from utils.setup_test import TestSetup
 from authentication.models import User
-from django.test import TestCase
 
-class TestModel(TestCase):
+
+class TestModel(TestSetup):
 
     def test_should_create_user(self):
-        
 
-        self.assertEqual(str(user), 'email@app.com')
+        user = self.create_test_user()
+
+        self.assertEqual(str(user), user.email)
 
 
