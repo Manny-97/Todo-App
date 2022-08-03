@@ -41,7 +41,8 @@ def send_action_email(user, request):
     email = EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_FROM_USER, to=[user.email])
 
     # email.send()
-    EmailThread(email).start()
+    if not settings.TESTING:
+        EmailThread(email).start()
 
 @auth_user_should_not_access
 def register(request):
