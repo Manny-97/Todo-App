@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-
+from django.contrib.messages import get_messages
 class TestViews(TestCase):
 
     def test_should_show_register_page(self):
@@ -37,6 +37,18 @@ class TestViews(TestCase):
         response = self.client.post(reverse('register'), self.user)
 
         self.assertEquals(response.status_code, 409)
+
+        storage = get_messages(response.wsgi_request)
+
+        errors = []
+        for message in storage:
+            print(message)
+            errors.append(message.message)
+
+        print(errors)
+        
+        self.assertIn('Username is taken, choose another one', errors)
+
 
     def test_should_not_signup_user_with_taken_email(self):
 

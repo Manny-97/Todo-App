@@ -76,6 +76,8 @@ def register(request):
             messages.add_message(request, messages.ERROR, 'Email is taken, choose another one')
             context['has_error'] = True 
 
+            return render(request, 'authentication/register.html', context, status=409)
+
         if context['has_error']:
             return render(request, 'authentication/register.html')
 
