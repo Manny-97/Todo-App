@@ -85,7 +85,7 @@ def register(request):
         user.set_password(password)
         user.save()
 
-        send_action_email(user, request)
+        # send_action_email(user, request)
 
         messages.add_message(request, messages.SUCCESS, 'Account created, you can now login')
         return redirect(request, 'login')
@@ -101,9 +101,9 @@ def login_user(request):
 
         user = authenticate(request, username=username, password=password)
 
-        if not user.is_email_verified:
-            messages.add_message(request, messages.ERROR, 'Email is not verified, please check your email inbox')
-            return render(request, 'authentication/login.html', context)
+        # if not user.is_email_verified:
+        #     messages.add_message(request, messages.ERROR, 'Email is not verified, please check your email inbox')
+        #     return render(request, 'authentication/login.html', context)
 
         if not user:
 
