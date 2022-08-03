@@ -1,7 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.messages import get_messages
-class TestViews(TestCase):
+from utils.setup_test import TestSetup
+
+class TestViews(TestSetup):
 
     def test_should_show_register_page(self):
         response = self.client.get(reverse('register'))

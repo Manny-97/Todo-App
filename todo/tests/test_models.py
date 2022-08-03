@@ -6,9 +6,7 @@ from todo.models import Todo
 class TestModel(TestCase):
 
     def test_should_create_todo(self):
-        user = User.objects.create_user(username='username', email='email@app.com')
-        user.set_password('password12!')
-        user.save()
+       
 
         todo = Todo(owner=user, title='Buy milk', description='get it done')
 
